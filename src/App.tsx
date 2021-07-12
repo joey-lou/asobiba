@@ -1,15 +1,23 @@
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Snake from "./games/snake";
+import Header from "./components/Header";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Playground
-        </p>
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <Switch>
+        <Route path="/snake">
+          <Snake />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
-
-export default App;
+function Home() {
+  return <h2>Home</h2>;
+}

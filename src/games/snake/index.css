@@ -1,0 +1,25 @@
+#game-board {
+  background-color: aquamarine;
+  width: 90vmin;
+  height: 90vmin;
+  display: grid;
+  margin: auto;
+  grid-template-columns: repeat(21, 1fr);
+  grid-template-rows: repeat(21, 1fr);
+}
+
+.snake {
+  background-color: blue;
+  width: 1fr;
+  height: 1fr;
+  display: grid;
+  border: 0.15vmin solid grey;
+}
+
+.food {
+  background-color: yellow;
+  width: 1fr;
+  height: 1fr;
+  display: grid;
+  border: 0.15vmin solid grey;
+}
