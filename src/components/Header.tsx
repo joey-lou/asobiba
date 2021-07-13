@@ -1,44 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
     },
-    menuButton: {
-      marginRight: theme.spacing(2),
+    toolbar: {
+      minHeight: "8vh",
     },
-    title: {
-      flexGrow: 1,
+    breadcrumb: {
+      color: "inherit",
     },
   })
 );
 
 export default function Header() {
   const classes = useStyles();
+  const [pathnames, setPathnames] = useState(["/"]);
+  useEffect(() => {
+    setPathnames(window.location.pathname.split("/").filter((x) => x));
+  }, [window.location]);
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            PlayGround
-          </Typography>
+        <Toolbar className={classes.toolbar}>
+          <Breadcrumbs maxItems={2} aria-label="breadcrumb">
+            {pathnames.map((name, idx) => {
+              return (
+                <Link className={classes.breadcrumb}>{name.toLowerCase()}</Link>
+              );
+            })}
+          </Breadcrumbs>
         </Toolbar>
       </AppBar>
     </div>

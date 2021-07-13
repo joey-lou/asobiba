@@ -2,7 +2,7 @@ import { Grid } from "./@types";
 import { expandSnake, onSnake } from "./snake";
 import { getRandomIntInclusive } from "./utils";
 let food: Grid;
-const EXPANSION_RATE = 1;
+const EXPANSION_RATE = 2;
 
 export function initialize() {
   console.log("init food");

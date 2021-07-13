@@ -1,7 +1,7 @@
 import { getInputDirection } from "./input";
 import { Grid } from "./@types";
 
-export const SNAKE_SPEED = 5;
+export const SNAKE_SPEED = 10;
 
 let snakeBody: Array<Grid> = [];
 

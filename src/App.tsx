@@ -8,10 +8,10 @@ export default function App() {
     <Router>
       <Header />
       <Switch>
-        <Route path="/snake">
+        <Route path="/games/snake">
           <Snake />
         </Route>
-        <Route path="/">
+        <Route exact path="/">
           <Home />
         </Route>
       </Switch>

@@ -1,29 +1,40 @@
 import "./index.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   update as updateSnake,
   draw as drawSnake,
   initialize as initializeSnake,
   SNAKE_SPEED,
 } from "./snake";
-import Container from "@material-ui/core/Container";
 import { initialize as initializeInput } from "./input";
-import Typography from "@material-ui/core/Typography";
 import {
   update as updateFood,
   draw as drawFood,
   initialize as initializeFood,
 } from "./food";
 import { changeDirection } from "./input";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import Box from "@material-ui/core/Box";
 const useStyles = makeStyles(() => ({
   message: {
     display: "fixed",
   },
   paper: {
-    backgroundColor: "grey",
+    backgroundColor: "#60992D",
+  },
+  start: {
+    position: "absolute",
+    width: "92vmin",
+    textAlign: "center",
+    color: "white",
+    marginTop: "10vmin",
+  },
+  over: {
+    position: "absolute",
+    width: "92vmin",
+    textAlign: "center",
+    marginTop: "40vmin",
+    color: "red",
   },
 }));
 
@@ -33,9 +44,6 @@ function Snake() {
   const [isOver, setIsOver] = useState(false);
 
   const onGameOver = () => {
-    console.warn("game ended!");
-    const gameBoard = document.getElementById("game-board");
-    gameBoard!.innerHTML = "";
     setStart(false);
     setIsOver(true);
   };
@@ -52,9 +60,21 @@ function Snake() {
       window.addEventListener("keydown", changeDirection);
 
       return () => {
+        clearInterval(id);
         // @ts-ignore
         window.removeEventListener("keydown", changeDirection);
-        clearInterval(id);
+      };
+    }
+  }, [start]);
+
+  useEffect(() => {
+    if (!start) {
+      // @ts-ignore
+      window.addEventListener("keydown", onPressSpaceBar);
+
+      return () => {
+        // @ts-ignore
+        window.removeEventListener("keydown", onPressSpaceBar);
       };
     }
   }, [start]);
@@ -65,7 +85,10 @@ function Snake() {
 
   return (
     <Paper className={classes.paper}>
-      <div id="game-board" tabIndex={0} onKeyDown={onPressSpaceBar}></div>
+      <div id="game-board">
+        {!start && <h3 className={classes.start}>Press Space to Start</h3>}
+        {isOver && <h2 className={classes.over}>Game Over</h2>}
+      </div>
     </Paper>
   );
 }
