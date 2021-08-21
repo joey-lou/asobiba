@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
     display: "fixed",
   },
   paper: {
-    backgroundColor: "#60992D",
+    backgroundColor: "#EEEEEE",
   },
   start: {
     position: "absolute",

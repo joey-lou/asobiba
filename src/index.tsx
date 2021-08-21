@@ -10,10 +10,10 @@ import green from "@material-ui/core/colors/green";
 const theme = createTheme({
   palette: {
     primary: {
-      main: purple[500],
+      main: "#6E85B2",
     },
     secondary: {
-      main: green[500],
+      main: "#F2E1C1",
     },
   },
 });

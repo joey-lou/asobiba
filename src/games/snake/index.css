@@ -1,5 +1,5 @@
 #game-board {
-  background-color: #ffd23f;
+  background-color: #030303;
   width: 92vh;
   height: 92vh;
   display: grid;
@@ -9,7 +9,7 @@
 }
 
 .snake {
-  background-color: #2191fb;
+  background-color: #ffffff;
   width: 1fr;
   height: 1fr;
   display: grid;
@@ -17,7 +17,7 @@
 }
 
 .food {
-  background-color: #d8572a;
+  background-color: #ffffff;
   width: 1fr;
   height: 1fr;
   display: grid;
