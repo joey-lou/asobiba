@@ -1,15 +1,20 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Snake from "./games/snake";
+import Games from "./components/games";
 import Header from "./components/Header";
+import Tools from "./components/tools";
 
 export default function App() {
   return (
     <Router>
       <Header />
       <Switch>
-        <Route path="/games/snake">
-          <Snake />
+        <Route path="/games">
+          <Games />
+        </Route>
+        <Route path="/notes">Notes</Route>
+        <Route path="/tools">
+          <Tools />
         </Route>
         <Route exact path="/">
           <Home />

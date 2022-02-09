@@ -16,6 +16,8 @@ import Drawer from "@material-ui/core/Drawer";
 import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import MenuIcon from "@material-ui/icons/Menu";
+import { capitalizeFirstLetter } from "./utils";
+
 interface LinkRouterProps extends LinkProps {
   to: string;
   replace?: boolean;
@@ -46,14 +48,14 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const breadcrumbNameMap: { [key: string]: string } = {
-  "/games": "Games",
-  "/games/snake": "Snake",
+const getName = (name: string) => {
+  const nameArray = name.split("/");
+  return capitalizeFirstLetter(nameArray[nameArray.length - 1]);
 };
 
 function ListItemLink(props: Omit<ListItemLinkProps, "ref">) {
   const { to, open, ...other } = props;
-  const primary = breadcrumbNameMap[to];
+  const primary = getName(to);
 
   return (
     <li>
@@ -109,9 +111,9 @@ export default function Header() {
                     const last = index === pathnames.length - 1;
                     const to = `/${pathnames.slice(0, index + 1).join("/")}`;
                     return last ? (
-                      <Typography color="textPrimary" key={to}>
+                      <LinkRouter color="textPrimary" key={to} to={to}>
                         {value}
-                      </Typography>
+                      </LinkRouter>
                     ) : (
                       <LinkRouter color="inherit" to={to} key={to}>
                         {value}
@@ -124,14 +126,23 @@ export default function Header() {
           </Route>
         </Toolbar>
       </AppBar>
-
+      {/* /* move drawer out into separate component */}
       <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
-        <nav className={classes.lists} aria-label="mailbox folders">
+        <nav className={classes.lists} aria-label="routes">
           <List>
             <ListItemLink to="/games" open={open} onClick={handleClick} />
             <Collapse component="li" in={open} timeout="auto" unmountOnExit>
               <List disablePadding>
                 <ListItemLink to="/games/snake" className={classes.nested} />
+              </List>
+            </Collapse>
+            <ListItemLink to="/tools" open={open} onClick={handleClick} />
+            <Collapse component="li" in={open} timeout="auto" unmountOnExit>
+              <List disablePadding>
+                <ListItemLink
+                  to="/tools/calculator"
+                  className={classes.nested}
+                />
               </List>
             </Collapse>
           </List>
